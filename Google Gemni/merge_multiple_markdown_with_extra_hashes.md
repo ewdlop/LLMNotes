@@ -302,3 +302,100 @@ print(merged_markdown)
 2.  Replace the `markdown_input` string with your actual markdown content.
 3.  Run the Python script.
 4.  The output will be the merged markdown with the extra hashes and the top-level header, preserving the original formatting of non-header elements.
+
+
+```python
+def merge_multiple_markdown_with_extra_hashes(markdown_inputs):
+    """
+    Merges multiple markdown inputs, adding an extra '#' to each header, and prepending a new top-level header.
+
+    Args:
+        markdown_inputs: A list of strings, where each string is a markdown content.
+
+    Returns:
+        A string containing the merged markdown content with extra hashes.
+    """
+
+    merged_lines = ["# Merged Markdown Content"]
+
+    for markdown_content in markdown_inputs:
+        lines = markdown_content.splitlines()
+        for line in lines:
+            stripped_line = line.lstrip()
+            if stripped_line.startswith("#"):
+                header_level = len(stripped_line.split(" ")[0])
+                new_header = "#" * (header_level + 1) + line[line.find("#")+header_level:]
+                merged_lines.append(new_header)
+            else:
+                merged_lines.append(line)
+        merged_lines.append("") #add an empty line between files.
+
+    return "\n".join(merged_lines).rstrip('\n') #remove trailing empty lines.
+
+# Example Usage:
+markdown_input1 = """
+# Header 1 from file 1
+Content 1.
+"""
+
+markdown_input2 = """
+## Header 2 from file 2
+Content 2.
+"""
+
+markdown_input3 = """
+### Header 3 from file 3
+Content 3.
+"""
+
+markdown_inputs = [markdown_input1, markdown_input2, markdown_input3]
+
+merged_markdown = merge_multiple_markdown_with_extra_hashes(markdown_inputs)
+print(merged_markdown)
+
+# Example with more varied content:
+markdown_inputs2 = [
+"""
+# File 1 header
+Normal text in file 1.
+* list in file 1
+""",
+"""
+  ## File 2 indented header
+> block quote in file 2
+```python
+print("Hello from file 2")
+```
+""",
+"""
+### file 3 header
+More text.
+"""
+]
+
+merged_markdown2 = merge_multiple_markdown_with_extra_hashes(markdown_inputs2)
+print("\n" + merged_markdown2)
+
+```
+
+**Key Changes for Multiple Inputs:**
+
+1.  **`merge_multiple_markdown_with_extra_hashes(markdown_inputs)` Function:**
+    * Takes a list of markdown strings (`markdown_inputs`) as input.
+    * Iterates through each `markdown_content` in the list.
+    * Processes each `markdown_content` using the same logic as the single-input version (handling leading whitespace, etc.).
+    * Appends an empty line between the content of each input file.
+    * Removes trailing empty lines from the final output.
+2.  **Example Usage:**
+    * Demonstrates how to pass a list of markdown strings to the function.
+    * Shows examples using both simple headers and more complex markdown content.
+3.  **Clear Separations:**
+    * The addition of empty lines between the content from each file makes the merged output easier to read.
+
+**How to Use:**
+
+1.  Copy the Python code.
+2.  Create a list of strings, where each string represents a markdown file's content.
+3.  Pass this list to the `merge_multiple_markdown_with_extra_hashes()` function.
+4.  The output will be the merged markdown, with extra hashes, a top-level header, and clear separations between the original files.
+
