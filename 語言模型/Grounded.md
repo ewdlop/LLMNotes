@@ -1,6 +1,6 @@
 # Grounded
 
-## Ray: ground probability in Bayesian probability
+<s>## Ray: ground probability in Bayesian probability
 
 When discussing probability within a Bayesian framework, it's crucial to understand the role of "prior probability." While "ground probability" isn't a standard, formal term, the concept it might allude to is closely tied to the idea of a prior. Here's a breakdown:
 
@@ -32,4 +32,4 @@ When discussing probability within a Bayesian framework, it's crucial to underst
 * The prior probability is the starting point of those beliefs.
 * New evidence leads to the calculation of the posterior probability, which is the revised belief.
 
-Therefore, while "ground probability" isn't a standard term, its meaning is very close to the standard term "prior probability".
+Therefore, while "ground probability" isn't a standard term, its meaning is very close to the standard term "prior probability".</s>
