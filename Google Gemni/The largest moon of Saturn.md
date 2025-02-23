@@ -143,9 +143,8 @@ It's challenging to translate the entirety of a "bible" concept into pure mathem
 
 By using these mathematical tools, we can begin to create a quantitative framework for understanding Titan and its potential for life.
 
-## 
+## write it in Coq
 
-```coq
 ```coq
 (* Titan's Environment *)
 
