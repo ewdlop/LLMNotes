@@ -13,3 +13,5 @@
 <https://press.princeton.edu/series/in-a-nutshell?srsltid=AfmBOorPSPnmjrrCX2ovNrUeEklKwI4dKFIR51yiYSx-OmvYBc3sc8E8>
 
 Any mathematical rigorous textbook.
+
+<https://ai-bot.cn/manus/>
