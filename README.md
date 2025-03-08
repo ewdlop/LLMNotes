@@ -14,4 +14,6 @@
 
 Any mathematical rigorous textbook.
 
+## Manus
+
 <https://ai-bot.cn/manus/>
