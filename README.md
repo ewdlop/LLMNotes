@@ -15,3 +15,7 @@
 Any mathematical rigorous textbook.
 
 <https://ai-bot.cn/manus/>
+
+## Manus
+
+<https://manus.im/invitation/waitlist>
