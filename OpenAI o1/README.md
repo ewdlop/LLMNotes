@@ -96,10 +96,11 @@ response = client.chat.completions.create(
 - **Timeout handling**: Implement appropriate timeouts for o1 calls given higher latency expectations.
 
 ## Pricing (as of December 2024)
-- **o1**: Premium pricing reflecting enhanced reasoning capabilities. Approximately 3-4x the cost of GPT-4 Turbo.
-- **o1-mini**: More affordable option, roughly 80% cheaper than o1 while maintaining strong STEM performance.
-- **o1-pro**: Highest tier pricing with extended compute allocation through ChatGPT Pro ($200/month subscription).
-- **Reasoning tokens**: Charged but not shown in API responses; factor into total cost calculations.
+- **o1**: Premium pricing reflecting enhanced reasoning capabilities. See [OpenAI Pricing](https://openai.com/api/pricing/) for current per-token rates.
+- **o1-mini**: More cost-effective option for STEM-focused tasks. Consult official pricing page for exact token costs.
+- **o1-pro**: Available through ChatGPT Pro subscription ($200/month) with extended compute allocation for maximum reasoning capability.
+- **Reasoning tokens**: Internal reasoning tokens are charged but not shown in API responses. Total costs may be significantly higher than visible output tokens.
+- **Note**: Pricing subject to change; always verify current rates at https://openai.com/api/pricing/ before production deployment.
 
 ## Use cases and examples
 - **Competitive programming**: Solving Codeforces, LeetCode hard problems, algorithmic optimization.

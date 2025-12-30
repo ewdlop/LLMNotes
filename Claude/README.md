@@ -22,12 +22,12 @@ Notes on Anthropic's conversational AI models and their ecosystem.
 - **Artifacts**: Claude 3.5+ can generate standalone content (code, documents, diagrams) in a separate artifact container.
 
 ## Safety and reliability considerations
-- Constitutional AI alignment: Models trained with reinforcement learning from human feedback (RLHF) and Constitutional AI methods.
-- Built-in harmlessness training: Designed to refuse harmful requests while maintaining helpfulness.
-- Reduced hallucination: Strong emphasis on accuracy and citing limitations when uncertain.
-- Privacy-focused: Anthropic commits to not training on customer data without explicit permission.
-- Content moderation: Apply additional filtering for sensitive applications. Log interactions for compliance needs.
-- Rate limiting: Implement application-layer rate limits and retry logic with exponential backoff.
+- **Constitutional AI alignment**: Models trained with reinforcement learning from human feedback (RLHF) and Constitutional AI methods for robust safety.
+- **Built-in harmlessness training**: Designed to refuse harmful requests while maintaining helpfulness across diverse use cases.
+- **Reduced hallucination**: Strong emphasis on accuracy and citing limitations when uncertain about information.
+- **Privacy-focused**: Anthropic commits to not training on customer data without explicit permission, supporting enterprise privacy needs.
+- **Content moderation**: Additional filtering recommended for sensitive applications. Log interactions for compliance and audit requirements.
+- **Rate limiting**: Application-layer rate limits and retry logic with exponential backoff advised for production resilience.
 
 ## Evaluation ideas
 - **Automated**: regression tests for JSON formatting, tool call accuracy, and prompt-response consistency.
