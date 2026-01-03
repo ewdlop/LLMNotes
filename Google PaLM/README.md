@@ -4,6 +4,9 @@ Research and notes regarding Google's PaLM models.
 
 > **Warning:** The PaLM API is decommissioned. The Vertex AI PaLM API is scheduled to be decommissioned in October 2024. Please upgrade to the Gemini API.
 
+## Research Findings
+See [Research_Notes.md](Research_Notes.md) for detailed research notes on architecture, training, and legacy.
+
 ## PaLM 2
 
 PaLM 2 is a family of language models, optimized for ease of use on key developer use cases. It includes variations trained for text and chat generation as well as text embeddings.
@@ -40,6 +43,9 @@ PaLM 2 models come in different sizes, denoted by animal names:
     *   *Note: While the foundational model is multilingual, specific API implementations (like `text-bison-001`) may have had limited language support (e.g., English only) at launch or in certain regions.*
 *   **Reasoning**: Capable of logic, common sense reasoning, and mathematics.
 *   **Coding**: Proficient in coding tasks, trained on a large dataset of source code.
+
+## Tools
+*   `compare_palm_gemini.py`: A conceptual script demonstrating the comparison between PaLM 2 (Legacy) and Gemini (Active).
 
 ## References
 
