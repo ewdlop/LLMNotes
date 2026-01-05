@@ -17,6 +17,7 @@ class LLMDistanceMetrics:
         try:
             nltk.download('wordnet')
             nltk.download('punkt')
+            nltk.download('punkt_tab')
         except:
             print("Warning: NLTK resources could not be downloaded")
         
