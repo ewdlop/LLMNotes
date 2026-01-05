@@ -31,5 +31,10 @@ PaLM 2 is the successor, optimized for ease of use and available in four sizes:
 | **Code Gen** | Proficient | Superior, integrated with more context |
 | **Availability** | Legacy / Decommissioning | Active (Pro, Ultra, Nano, Flash) |
 
+## Experimental Evaluation
+Recent simulated experiments (see [PaLM_Experiments.md](PaLM_Experiments.md)) have established a framework for evaluating PaLM-like outputs using standard NLP metrics. Key findings include:
+- **BLEU Smoothing**: Essential for evaluating short text segments (e.g., idioms), where standard BLEU often yields 0.
+- **Metric Suitability**: ROUGE-L is often more robust for reasoning tasks, while BLEU effectively captures code structure similarity.
+
 ## Legacy & Transition
 The PaLM API is decommissioned. Users are directed to migrate to Gemini, which offers superior performance, multimodal capabilities, and a more robust ecosystem.

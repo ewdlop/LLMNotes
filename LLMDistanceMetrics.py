@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModel
 import nltk
-from nltk.translate.bleu_score import sentence_bleu
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.translate.meteor_score import meteor_score
 from rouge_score import rouge_scorer
 
@@ -55,7 +55,10 @@ class LLMDistanceMetrics:
         """
         reference_tokens = nltk.word_tokenize(reference)
         candidate_tokens = nltk.word_tokenize(candidate)
-        return sentence_bleu([reference_tokens], candidate_tokens)
+
+        # Use smoothing to handle short sentences where higher order n-grams are missing
+        cc = SmoothingFunction()
+        return sentence_bleu([reference_tokens], candidate_tokens, smoothing_function=cc.method1)
 
     def compute_rouge(self, reference: str, candidate: str) -> Dict[str, float]:
         """
