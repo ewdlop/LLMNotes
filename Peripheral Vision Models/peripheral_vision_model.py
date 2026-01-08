@@ -235,8 +235,8 @@ class AttentionFocusSelector(nn.Module):
         # Find maximum saliency point
         saliency = saliency[0, 0]  # First image, single channel
         max_idx = saliency.flatten().argmax()
-        w = max_idx // saliency.size(1)  # Row index
-        h = max_idx % saliency.size(1)   # Column index
+        h = max_idx // saliency.size(1)  # Row index (height coordinate)
+        w = max_idx % saliency.size(1)   # Column index (width coordinate)
         
         return (int(h), int(w))
 
