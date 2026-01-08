@@ -18,6 +18,9 @@ class PeripheralVisionEncoder(nn.Module):
     Dual-stream encoder with foveal (high-res) and peripheral (low-res) processing.
     """
     
+    # Class constants
+    PERIPHERAL_DOWNSAMPLE_FACTOR = 4  # Factor for peripheral resolution reduction
+    
     def __init__(
         self,
         foveal_size: int = 224,
@@ -150,9 +153,11 @@ class PeripheralVisionEncoder(nn.Module):
         foveal_features = self.foveal_encoder(foveal_region)
         
         # Encode full image at low resolution (peripheral)
+        peripheral_downsample = self.PERIPHERAL_DOWNSAMPLE_FACTOR
         peripheral_image = F.interpolate(
             image,
-            size=(self.peripheral_size // 4, self.peripheral_size // 4),
+            size=(self.peripheral_size // peripheral_downsample, 
+                  self.peripheral_size // peripheral_downsample),
             mode='bilinear',
             align_corners=False
         )
@@ -230,8 +235,8 @@ class AttentionFocusSelector(nn.Module):
         # Find maximum saliency point
         saliency = saliency[0, 0]  # First image, single channel
         max_idx = saliency.flatten().argmax()
-        h = max_idx // saliency.size(1)
-        w = max_idx % saliency.size(1)
+        w = max_idx // saliency.size(1)  # Row index
+        h = max_idx % saliency.size(1)   # Column index
         
         return (int(h), int(w))
 
@@ -320,10 +325,12 @@ def compute_efficiency_metrics(
     def count_flops(module, input, output):
         flops = 0
         if isinstance(module, nn.Conv2d):
-            # FLOPs = output_elements * (kernel_size * in_channels * 2)
-            out_h, out_w = output.size(2), output.size(3)
-            kernel_ops = module.kernel_size[0] * module.kernel_size[1] * module.in_channels
-            flops = out_h * out_w * module.out_channels * kernel_ops * 2
+            # Check if output has spatial dimensions
+            if len(output.shape) >= 4:
+                # FLOPs = output_elements * (kernel_size * in_channels * 2)
+                out_h, out_w = output.size(2), output.size(3)
+                kernel_ops = module.kernel_size[0] * module.kernel_size[1] * module.in_channels
+                flops = out_h * out_w * module.out_channels * kernel_ops * 2
         elif isinstance(module, nn.Linear):
             flops = module.in_features * module.out_features * 2
         return flops
@@ -364,6 +371,10 @@ def demo_peripheral_vision_model():
     print("Peripheral Vision Language Model Demo")
     print("=" * 70)
     
+    # Configuration
+    IMAGE_SIZE = 512
+    BATCH_SIZE = 4
+    
     # Create model
     print("\n1. Creating Peripheral Vision Model...")
     model = PeripheralVisionVLM(
@@ -374,7 +385,7 @@ def demo_peripheral_vision_model():
     
     # Compute efficiency metrics
     print("\n2. Computing Efficiency Metrics...")
-    metrics = compute_efficiency_metrics(model, (1, 3, 512, 512))
+    metrics = compute_efficiency_metrics(model, (1, 3, IMAGE_SIZE, IMAGE_SIZE))
     print(f"   Total Parameters: {metrics['total_parameters']:,}")
     print(f"   Trainable Parameters: {metrics['trainable_parameters']:,}")
     print(f"   Estimated GFLOPs: {metrics['estimated_gflops']:.2f}")
@@ -382,8 +393,7 @@ def demo_peripheral_vision_model():
     
     # Create dummy input
     print("\n3. Running Inference...")
-    batch_size = 4
-    dummy_image = torch.randn(batch_size, 3, 512, 512)
+    dummy_image = torch.randn(BATCH_SIZE, 3, IMAGE_SIZE, IMAGE_SIZE)
     
     model.eval()
     with torch.no_grad():

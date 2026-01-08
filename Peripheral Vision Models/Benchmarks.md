@@ -18,6 +18,12 @@ This document provides detailed performance benchmarks comparing peripheral visi
 - PyTorch 2.0+
 - CUDA 11.8
 - cuDNN 8.6
+- NVIDIA Driver: 525.85.12
+- Storage: NVMe SSD (3500 MB/s read, 3000 MB/s write)
+
+**Note**: All benchmarks represent averages over multiple runs with standard deviations 
+reported where applicable. Results may vary based on specific hardware, software versions, 
+and workload characteristics.
 
 **Evaluation Metrics**:
 - **Latency**: Time per inference (ms)

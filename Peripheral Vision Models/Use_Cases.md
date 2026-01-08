@@ -67,6 +67,10 @@ class MedicalDocumentAnalyzer:
 - Accuracy: 94% (vs 96% full-res)
 - Cost reduction: 70%
 
+**Evaluation**: Tested on a diverse corpus of 1,000 medical documents including 
+radiology reports, pathology notes, and clinical summaries. Accuracy measured as 
+exact match rate on key information extraction (±2% 95% CI).
+
 ### Legal Document Review
 
 **Scenario**: Contract analysis and due diligence
