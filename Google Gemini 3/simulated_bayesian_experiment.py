@@ -66,6 +66,29 @@ def run_experiment():
     print(f"Baseline BLEU: {baseline_bleu_diag:.4f}")
     print("\n")
 
+    # Case 3: The Monty Hall Problem
+    print("--- Experiment 3: The Monty Hall Problem ---")
+    print("Scenario: You pick Door 1. Host Monty Hall (who knows what's behind doors) opens Door 3, revealing a goat. Should you switch to Door 2?")
+
+    reference_monty = "Bayes' Theorem confirms you should switch. Let H1 be the car is behind Door 1, H2 for Door 2, H3 for Door 3. Prior P(H1)=P(H2)=P(H3)=1/3. Evidence E is Host opens Door 3. P(E|H1)=1/2 (Host can open 2 or 3). P(E|H2)=1 (Host must open 3). P(E|H3)=0 (Host won't reveal car). Posterior P(H2|E) = P(E|H2)P(H2)/P(E) = (1 * 1/3) / (1/2*1/3 + 1*1/3 + 0) = (1/3) / (1/2) = 2/3. Switching doubles your chance."
+
+    # Simulated Gemini 3 (Correct Bayesian derivation)
+    gemini_monty = "Let C1, C2, C3 be the events that the car is behind Door 1, 2, or 3. P(C1)=P(C2)=P(C3)=1/3. You picked Door 1. The Host opens Door 3 (Event D3). We calculate P(C2|D3). Likelihoods: P(D3|C1) = 1/2 (Host picks randomly between 2 and 3). P(D3|C2) = 1 (Host must pick 3). P(D3|C3) = 0. Marginal P(D3) = 1/2 * 1/3 + 1 * 1/3 + 0 = 1/6 + 1/3 = 1/2. P(C2|D3) = (1 * 1/3) / (1/2) = 2/3. Conclusion: Switch to Door 2."
+
+    # Simulated Baseline (Common intuition error)
+    baseline_monty = "There are two doors left, Door 1 and Door 2. It's a 50/50 chance now, so it doesn't matter if you switch or stay."
+
+    print(f"Reference: {reference_monty}")
+    print(f"Gemini 3 (Simulated): {gemini_monty}")
+    print(f"Baseline: {baseline_monty}")
+
+    gemini_bleu_monty = metrics.compute_bleu(reference_monty, gemini_monty)
+    baseline_bleu_monty = metrics.compute_bleu(reference_monty, baseline_monty)
+
+    print(f"Gemini 3 BLEU: {gemini_bleu_monty:.4f}")
+    print(f"Baseline BLEU: {baseline_bleu_monty:.4f}")
+    print("\n")
+
     print("Experiment Complete.")
 
 if __name__ == "__main__":
